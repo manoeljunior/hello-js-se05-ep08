@@ -1,12 +1,32 @@
 {
-  "name": "client",
+  "name": "hello-js-se05-ep08",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "build.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "budo src/main.js:build.js -o -l",
+    "build": "browserify src/main.js -o build.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^15.2.0",
+    "browserify-css": "^0.14.0",
+    "budo": "^11.0.1",
+    "vueify": "^9.4.1"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "vue": "^2.5.13",
+    "vue-material": "^0.8.1",
+    "vue-router": "^3.0.1"
+  },
+  "browserify": {
+    "transform": [
+      "vueify",
+      "browserify-css"
+    ]
+  }
 }
