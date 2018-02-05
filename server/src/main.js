@@ -21,6 +21,12 @@ app.post('/check/:user', (req, res) => {
   issues.forEach(issue => {
     if (issue.title.includes('SE05EP')) {
       // to call each issue and search for user's comments
+      api.get(`/repos/sombriks/hello-js-v5/issues/${issue.number}/comments`).then(res => {
+        console.log(issue.title, '-----')
+        console.log(res.data.filter(item => {
+          return item.user.login === req.params.user
+        }))
+      })
     }
   })
   //res.send(issues)
