@@ -16,10 +16,14 @@ const api = axios.create({
   baseURL: 'https://api.github.com'
 })
 
-
 // Search user's comments for each issue and save into database
 app.post('/check/:user', (req, res) => {
-
+  issues.forEach(issue => {
+    if (issue.title.includes('SE05EP')) {
+      // to call each issue and search for user's comments
+    }
+  })
+  //res.send(issues)
 })
 
 knex.migrate.latest().then( () => {
@@ -35,7 +39,7 @@ knex.migrate.latest().then( () => {
         if(res) console.log('Issues inserted successfully')
       })
     } else {
-      console.log(res)
+      issues = res
     }
   })
 
