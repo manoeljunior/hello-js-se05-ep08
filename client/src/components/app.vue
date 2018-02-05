@@ -1,21 +1,30 @@
 <template>
   <div>
-    <md-layout md-align="center" md-gutter="20">
-      <md-layout md-align="center" md-flex="100">
-        <h1>Final project - Hello.js</h1>
-      </md-layout>
-  
-      <md-layout md-flex-small="100" md-flex="50">
-        <form @submit.prevent="check">
-          <md-input-container>
-            <label>Usuário</label>
-            <md-input v-model="user" required></md-input>
-          </md-input-container>
-        </form>
-      </md-layout>
-      <router-view></router-view>
-    </md-layout>
-    
+    <md-card>
+      <md-card-header>
+        <div class="md-title">
+          Final Project - Hello.js
+        </div>
+        <div class="md-subhead">
+          by @manoeljunior
+        </div>
+        <md-card-content>
+          <md-layout md-gutter>
+            <md-layout md-flex="50">
+              <md-input-container>
+                <label>Usuário</label>
+                <md-input v-model="user" class="md-inline"></md-input>
+              </md-input-container>  
+            </md-layout>
+            <md-layout>
+              <md-button class="md-icon-button md-raised md-primary">
+                <md-icon>check_cicle</md-icon>
+              </md-button>
+            </md-layout>
+          </md-layout>
+        </md-card-content>
+      </md-card-header>
+    </md-card>
   </div>
 </template>
 
@@ -26,7 +35,7 @@ module.exports = {
   name: "App",
   data () {
     return {
-      user: 'tesst'
+      user: ''
     }
   },
   methods: {
