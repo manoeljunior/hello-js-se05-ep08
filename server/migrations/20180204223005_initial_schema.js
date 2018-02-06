@@ -9,11 +9,11 @@ exports.up = knex => knex.schema.createTable('issues', tb => {
   tb.string('name')
   tb.string('avatar')
 }).createTable('comments', tb => {
+  tb.increments('id_comment')
   tb.integer('id_issue').notNullable()
     .references('issues.id').onDelete('cascade')
   tb.integer('id_user').notNullable()
     .references('user.id_user').onDelete('cascade')
-  tb.primary(['id_issue', 'id_user'])
   tb.string('comment')
 })
 
