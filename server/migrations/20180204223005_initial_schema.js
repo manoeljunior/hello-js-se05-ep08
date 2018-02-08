@@ -14,7 +14,7 @@ exports.up = knex => knex.schema.createTable('issues', tb => {
     .references('issues.id').onDelete('cascade')
   tb.integer('id_user').notNullable()
     .references('user.id_user').onDelete('cascade')
-  tb.string('comment')
+  tb.string('body')
 })
 
 exports.down = knex => knex.schema

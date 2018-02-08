@@ -16,70 +16,114 @@ const api = axios.create({
   baseURL: 'https://api.github.com'
 })
 
+// app.post('/list', (req, res) => {
+//   knex('comments').join('users', 'comments.id_comment', '=', 'users.id_user')
+// })
+
 // Search user's comments for each issue and save into database
 app.post('/check/:user', (req, res) => {
-  // let userFound = false
+
+  issues = [
+    { id: 291579075, number: 3, title: 'SE05EP01' },
+    { id: 291579364, number: 4, title: 'SE05EP02' },
+    { id: 291579687, number: 5, title: 'SE05EP02' }
+  ]
+
+  let f = function(issue) {
+    console.log(`/repos/sombriks/hello-js-v5/issues/${issue.number}/comments`)
+    return api.get(`/repos/sombriks/hello-js-v5/issues/${issue.number}/comments`)
+  }
+
+  let urlCall = []
+  
+
+  let userComments = { 
+     user: req.params.user,
+     comments: [] 
+  }
+  //let issueUserComments = []
+  let object = []
   let msg = 'user not found'
-  issues = [{ id: 291579075, number: 3, title: 'SE05EP01' }]
+  
   console.log(issues)
-  issues.forEach(issue => {
-    if (issue.title.includes('SE05EP')) {
-      // to call each issue and search for user's comments
-      api.get(`/repos/sombriks/hello-js-v5/issues/${issue.number}/comments`).then(result => {
-        let comments = result.data.filter(item => {
-          return item.user.login === req.params.user
+  // issues.forEach(issue => {
+  //   urlCall.push(() => {
+  //     return api.get(`/repos/sombriks/hello-js-v5/issues/${issue.number}/comments`)
+  //   })()
+  // })
+ 
+  Promise.all([f(issues[0]), f(issues[1]), f(issues[2])]).then(results => {
+    console.log('Promise all')
+    console.log(results[0])
+    results.forEach((result, idx) => {
+      let issueUserComments = result.data.filter(item => {
+        return item.user.login === req.params.user
+      })
+
+      if (issueUserComments.length > 0) {
+        issueUserComments.forEach(item => {
+          item.id_issue = issues[idx].id
+          item.id_user = item.user.id
+          item.body = item.body
+          userComments.comments.push(_.pick(item, ['id_issue', 'id_user', 'body', 'user' ]))
         })
-        console.log(`${issue.title} - ${issue.number}`)
-        console.log(comments)
-        if (comments.length > 0) {
-          //userFound = true
-          console.log('Checking if user exists on database')
-          knex('users').where({
-            name: req.params.user
-          }).select().then(users => {
-            console.log(users)
-            if (users.length == 0) {
-              console.log('before insert!')
-              // insert a new user
-              knex('users').insert({
-                id_user: comments[0].user.id,
-                name: comments[0].user.login,
-                avatar: comments[0].user.avatar_url,
-              }).then(userInserted => {
-                if(userInserted.length > 0) {
-                  // insert user's comments
-                  let payload = []
-                  comments.forEach(comment => {
-                    let obj = {
-                      id_issue: issue.id,
-                      id_user: comment.user.id,
-                      comment: comment.body
-                    }
-                    payload.push(obj)
-                  })
-                  console.log(payload)
-                  knex('comments').insert(payload).then(commentInsert => {
-                    if(userInserted.length > 0) {
-                      console.log(userInserted)
-                      msg = 'Comments inserted succesfully'
-                    }
-                  })
-                }
-              })
-            } else {
-              console.log('......')
-              msg = 'User already inserted'
-            }
+      }
+
+      // console.log('issueUserComments ****')
+      // console.log(issueUserComments)
+
+      // console.log('userComments ***')
+      // console.log(userComments)
+
+    })
+
+    // persist the user and comments
+    if (userComments.comments.length > 0) {
+      knex('users').select().where('name', userComments.user).then(user => {
+        console.log('consulta')
+        console.log(user)
+        // Dont' save the user if exists
+        if (user.length == 0) {
+          knex('users').insert({
+            id_user: userComments.comments[0].user.id,
+            name: userComments.comments[0].user.login,
+            avatar: userComments.comments[0].user.avatar_url,
+          }).then(userInserted => {
+            console.log('userInserted')
+            console.log(userInserted)
+            let comments = []
+            userComments.comments.forEach(comment => {
+              let obj = _.pick(comment, ['id_issue', 'id_user', 'body'])
+              comments.push(obj)
+            })
+            knex('comments').insert(comments).then(commentsInserted => {
+              console.log('commentsInserted')
+              console.log(commentsInserted)
+              if(commentsInserted.length > 0) {
+                console.log(commentsInserted)
+                res.send({
+                  msg: 'Comments inserted succesfully'
+                })
+              }
+            })
+          })
+        } else {
+          res.send({
+            msg: 'User already saved'
           })
         }
-        //res.send()
-      }).catch(e => {
-        console.log(e)
-        res.status(500).send()
+      })  
+    } else {
+      res.send({
+        msg: 'There is no comments'
       })
     }
+    // console.log(result[0].data)
+    // console.log(result[1].data)
+  }).catch(err => {
+    console.log(err)
   })
-  res.send({msg})
+  //res.send({msg})
 })
 
 knex.migrate.latest().then( () => {
