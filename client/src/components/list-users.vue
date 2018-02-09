@@ -10,6 +10,7 @@
         <md-table>
           <md-table-header>
             <md-table-row>
+              <md-table-head></md-table-head>
               <md-table-head>Aluno</md-table-head>
               <md-table-head v-for="index in 8" :key="index">Aula 0{{index}}</md-table-head>
             </md-table-row>
@@ -17,7 +18,15 @@
 
           <md-table-body>
             <md-table-row v-for="(item, index) in comments" :key="index">
-              <md-table-cell>{{item.user}}</md-table-cell>
+              <md-table-cell>
+                <md-avatar>
+                  <img :src="item.avatar" alt="Avatar">
+                </md-avatar>
+              </md-table-cell>
+              <md-table-cell>
+                {{item.user}}
+              </md-table-cell>
+
               <template v-for="idx in 8">
                 <md-table-cell v-if="item.comments['SE05EP0'+idx]"><i class="material-icons green">mood</i></md-table-cell>
                 <md-table-cell v-else="item.comments['SE05EP0'+idx]"><i class="material-icons red">highlight_off</i></md-table-cell>

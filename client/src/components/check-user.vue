@@ -14,6 +14,7 @@
           <md-layout>
             <md-button @click="check" class="md-primary">
               <md-icon>find_in_page</md-icon>
+              <md-tooltip md-direction="top">Search for a user</md-tooltip>
             </md-button>
           </md-layout>      
         </md-layout>
@@ -21,6 +22,7 @@
     <md-layout>
       <md-button class="md-primary" @click="listUsers">
         <md-icon>playlist_add_check</md-icon>
+        <md-tooltip md-direction="top">List all users inserted</md-tooltip>
       </md-button>
     </md-layout>
   </div>  
