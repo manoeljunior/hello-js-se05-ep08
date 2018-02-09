@@ -13,16 +13,13 @@
         </md-layout>
       </md-layout>
     </form>
-    <md-layout>
-      <md-button @click="check" class="md-primary md-raised">
+    <md-card-actions>
+      <md-button @click="check" class="md-icon-button md-primary md-raised">
         <md-icon>find_in_page</md-icon>
         <md-tooltip md-direction="right">Search for a user</md-tooltip>
       </md-button>
-      <md-button @click="listUsers" class="md-primary md-raised">
-        <md-icon>playlist_add_check</md-icon>
-        <md-tooltip md-direction="right">List all users inserted</md-tooltip>
-      </md-button>
-    </md-layout>
+    </md-card-actions>
+
   </div>  
 </template>
 
@@ -44,18 +41,19 @@ module.exports = {
   },
   methods: {
     check() {
-      this.searching = true;
       this.msg = ''
-      api.post('/check', {user: this.user}).then(ret => {
-        this.msg = ret.data.msg;
-        this.searching = false;
-      }).catch(err => {
-        this.msg = err.response.data.msg;
-        this.searching = false;
-      })
-    },
-    listUsers() {
-      this.$router.push('/list-users')
+      if (this.user) {
+        this.searching = true;
+        api.post('/check', {user: this.user}).then(ret => {
+          this.msg = ret.data.msg;
+          this.searching = false;
+        }).catch(err => {
+          this.msg = err.response.data.msg;
+          this.searching = false;
+        })
+      } else {
+        this.msg = 'Informe o aluno'
+      }
     }
   }
 };

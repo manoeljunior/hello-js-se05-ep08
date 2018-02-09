@@ -2,7 +2,7 @@
   <div id="check-user">
     <md-layout md-gutter>
       <md-layout md-flex="50">
-        <h4>Listagem de presença</h4>
+        <h5 class="md-title">Listagem de presença</h5>
       </md-layout>
     </md-layout>
     <md-layout md-gutter>
@@ -37,13 +37,6 @@
         </md-table>
       </md-layout>
     </md-layout>
-    <md-layout md-gutter>
-      <md-layout md-flex="50">
-        <md-button @click="checkUser" class="md-primary">
-          <md-icon>person_add</md-icon>
-        </md-button>
-      </md-layout>
-    </md-layout>
   </div>  
 </template>
 
@@ -61,11 +54,6 @@ module.exports = {
       comments: [ ]
     }
   },
-  methods: {
-    checkUser() {
-      this.$router.push('/check-user')
-    }
-  },
   created() {
     api.get('/listall').then(ret => {
       this.comments = ret.data
@@ -79,7 +67,7 @@ module.exports = {
 
 <style scoped>
   .green {
-    color: green;
+    color: darkgreen;
   }
 
   .red {
