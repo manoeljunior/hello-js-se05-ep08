@@ -105,7 +105,7 @@ app.post('/check', (req, res) => {
     }
   }).catch(err => {
     console.log(err);
-    res.status(err.response.status).send({
+    res.status(500).send({
       msg: err.response.data.message
     })
   })
