@@ -5,29 +5,29 @@ Projeto final do curso de javascript fullstack.
 
 ## Features
 
-  - Pesquisar um usuario nas issues criadas e persistir os comentarios no banco;
-  - Apresentar a lista de presenca de todos os participantes do curso, com base nos comentarios das issues salvos no banco
+  - Pesquisar um usuário nas issues criadas e persistir os comentários no banco;
+  - Apresentar a lista de presença de todos os participantes do curso, com base nos comentários das issues salvos no banco.
 
 
 ## Tecologias
 
-Pacotes utilizados utilizados no projeto:
+Pacotes utilizados no projeto:
 
 * [Node.js] - HTML enhanced for web apps!
-* [Express] - Criacao das rotas do servidor
+* [Express] - Criação das rotas do servidor
 * [Knex] - SQL Query builder
 * [SQLite3] - Banco de dados
-* [VueMaterial] - Implementacao do Material Design para vue.js
+* [VueMaterial] - Implementação do Material Design para vue.js
 * [vue.js] - The Progressive JavaScript Framework
 * [Axios] - Client HTTP baseado em Promises
 
 
 
-## Instalacao
+## Instalação
 
 Final Project requer [Node.js](https://nodejs.org/) v7+ para executar.
 
-Clonando o repositóororio.
+Clonando o repositório.
 ```bash
 $ git clone https://github.com/manoeljunior/hello-js-se05-ep08.git
 ```
@@ -41,7 +41,7 @@ $ npm install
 $ node run dev
 ```
 
-Instalando as dependencias do server e iniciando.
+Instalando as dependências do server e iniciando.
 
 ```sh
 $ cd hello-js-se05-ep08
