@@ -4,8 +4,8 @@ Projeto final do curso de javascript fullstack.
 
 ## Features
 
-  - Pesquisar um usuário nas issues criadas e persistir os comentários no banco;
-  - Apresentar a lista de presença de todos os participantes do curso, com base nos comentários das issues salvos no banco.
+  * Pesquisar um usuário nas issues criadas e persistir os comentários no banco;
+  * Apresentar a lista de presença de todos os participantes do curso, com base nos comentários das issues salvos no banco.
 
 
 ## Tecnologias
