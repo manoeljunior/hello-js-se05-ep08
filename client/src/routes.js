@@ -1,9 +1,8 @@
 const router = {
   routes: [
-    // { path: "/lista-festas", component: require("./lista-festas.vue") },
-    // { path: "/criar-festa", component: require("./criar-festa.vue") },
-    // { path: "/lista-convidados", component: require("./lista-convidados.vue") },
-    // { path: "/criar-convidado", component: require("./criar-convidado.vue") },
+    { path: "/", component: require("./components/check-user.vue") },
+    { path: "/check-user", component: require("./components/check-user.vue") },
+    { path: "/list-users", component: require("./list-users.vue") }
   ]
 }
 
