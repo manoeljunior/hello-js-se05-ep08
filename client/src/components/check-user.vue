@@ -14,7 +14,7 @@
       </md-layout>
     </form>
     <md-card-actions>
-      <md-button @click="check" class="md-icon-button md-primary md-raised">
+      <md-button @click="check" class="md-icon-button md-raised md-primary" :disabled="searching">
         <md-icon>find_in_page</md-icon>
         <md-tooltip md-direction="right">Search for a user</md-tooltip>
       </md-button>
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-const VueRouter = require("vue-router");
 const axios = require("axios");
 const api = axios.create({
   baseURL: "http://localhost:3000"
