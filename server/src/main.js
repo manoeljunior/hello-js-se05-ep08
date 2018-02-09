@@ -25,12 +25,13 @@ app.get('/listall', (req, res) => {
     .join('users', 'comments.id_user', '=', 'users.id_user')
     .join('issues', 'comments.id_issue', '=', 'issues.id')
     .where('comments.body', 'like', '%present%')
-    .select('comments.body', 'users.name', 'issues.title', 'comments.id_issue')
+    .select('comments.body', 'users.name', 'users.avatar', 'issues.title', 'comments.id_issue')
     .orderBy('users.name').then(result => {
       result.forEach(item => {
         if(userGroup != item.name) {
           newResult.push({
             user: item.name,
+            avatar: item.avatar,
             comments: extractComments(result, item.name)
           })
           userGroup = item.name
