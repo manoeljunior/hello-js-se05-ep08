@@ -87,20 +87,20 @@ app.post('/check', (req, res) => {
             knex('comments').insert(comments).then(commentsInserted => {
               if(commentsInserted.length > 0) {
                 res.send({
-                  msg: 'Comments inserted succesfully'
+                  msg: 'Aluno inserido com sucesso'
                 })
               }
             })
           })
         } else {
           res.send({
-            msg: 'User already saved'
+            msg: 'Aluno já existe'
           })
         }
       })  
     } else {
       res.send({
-        msg: 'There is no comments'
+        msg: 'Aluno não matriculado'
       })
     }
   }).catch(err => {
