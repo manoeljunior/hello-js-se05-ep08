@@ -26,12 +26,12 @@ Pacotes utilizados no projeto:
 
 Final Project requer [Node.js](https://nodejs.org/) v7+ para executar.
 
-Clonando o repositório.
+Clonando o repositório:
 ```bash
 $ git clone https://github.com/manoeljunior/hello-js-se05-ep08.git
 ```
 
-Instalando as dependencias do client e iniciando.
+Instalando as dependencias do client e iniciando:
 
 ```sh
 $ cd hello-js-se05-ep08
@@ -40,7 +40,7 @@ $ npm install
 $ node run dev
 ```
 
-Instalando as dependências do server e iniciando.
+Instalando as dependências do server e iniciando:
 
 ```sh
 $ cd hello-js-se05-ep08
