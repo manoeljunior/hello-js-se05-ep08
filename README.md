@@ -8,7 +8,7 @@ Projeto final do curso de javascript fullstack.
   - Apresentar a lista de presença de todos os participantes do curso, com base nos comentários das issues salvos no banco.
 
 
-## Tecologias
+## Tecnologias
 
 Pacotes utilizados no projeto:
 
