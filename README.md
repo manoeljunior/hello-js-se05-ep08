@@ -37,7 +37,7 @@ Instalando as dependencias do client e iniciando:
 $ cd hello-js-se05-ep08
 $ cd client
 $ npm install
-$ node run dev
+$ npm run prod
 ```
 
 Instalando as dependências do server e iniciando:
@@ -46,7 +46,7 @@ Instalando as dependências do server e iniciando:
 $ cd hello-js-se05-ep08
 $ cd server
 $ npm install
-$ node run dev
+$ npm run prod
 ```
 
    [node.js]: <http://nodejs.org>
